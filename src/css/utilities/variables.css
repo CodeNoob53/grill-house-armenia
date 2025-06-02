@@ -1,0 +1,145 @@
+/* CSS Custom Properties (Variables) */
+:root {
+    /* Colors */
+    --primary-color: #e63946;
+    --primary-dark: #c5303b;
+    --primary-light: #ff5a68;
+    --secondary-color: #f77f00;
+    --secondary-dark: #d86e00;
+    --secondary-light: #ff9933;
+    
+    --dark-color: #2b2d42;
+    --dark-lighter: #3d4068;
+    --light-color: #f8f9fa;
+    --white: #ffffff;
+    
+    --text-dark: #212529;
+    --text-medium: #495057;
+    --text-light: #6c757d;
+    --text-lighter: #adb5bd;
+    
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --info-color: #17a2b8;
+    
+    --border-color: #dee2e6;
+    --border-light: #e9ecef;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    
+    /* Background Colors */
+    --bg-primary: #f8f9fa;
+    --bg-secondary: #e9ecef;
+    --bg-dark: #343a40;
+    
+    /* Section-specific Colors */
+    --hero-bg: var(--light-color);
+    --hero-text: var(--text-dark);
+    
+    --menu-bg: var(--bg-primary);
+    --menu-text: var(--text-dark);
+    
+    --order-bg: var(--white);
+    --order-text: var(--text-dark);
+    
+    --contact-bg: var(--dark-color);
+    --contact-text: var(--white);
+    
+    --footer-bg: var(--dark-color);
+    --footer-text: var(--white);
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;    /* 4px */
+    --spacing-sm: 0.5rem;     /* 8px */
+    --spacing-md: 1rem;       /* 16px */
+    --spacing-lg: 1.5rem;     /* 24px */
+    --spacing-xl: 2rem;       /* 32px */
+    --spacing-xxl: 3rem;      /* 48px */
+    --spacing-xxxl: 4rem;     /* 64px */
+    
+    /* Typography */
+    --font-family-primary: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-family-secondary: 'Georgia', serif;
+    
+    --font-size-xs: 0.75rem;   /* 12px */
+    --font-size-sm: 0.875rem;  /* 14px */
+    --font-size-base: 1rem;    /* 16px */
+    --font-size-lg: 1.125rem;  /* 18px */
+    --font-size-xl: 1.25rem;   /* 20px */
+    --font-size-2xl: 1.5rem;   /* 24px */
+    --font-size-3xl: 1.875rem; /* 30px */
+    --font-size-4xl: 2.25rem;  /* 36px */
+    --font-size-5xl: 3rem;     /* 48px */
+    
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.625;
+    --line-height-loose: 2;
+    
+    /* Layout */
+    --container-max-width: 1200px;
+    --container-padding: var(--spacing-md);
+    
+    --header-height: 80px;
+    --hero-min-height: 600px;
+    --section-padding: var(--spacing-xxxl);
+    
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+    --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.15);
+    
+    /* Transitions */
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Z-indexes */
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    --z-popover: 1060;
+    --z-tooltip: 1070;
+    
+    /* Breakpoints (for media queries) */
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --breakpoint-xxl: 1400px;
+}
+
+/* Light theme (default) */
+.light-theme {
+    --hero-text: var(--text-dark);
+    --menu-bg: var(--bg-primary);
+    --menu-text: var(--text-dark);
+    --order-bg: var(--white);
+    --order-text: var(--text-dark);
+}
+
+/* Dark sections */
+.dark-section {
+    --section-bg: var(--dark-color);
+    --section-text: var(--white);
+    --section-text-light: rgba(255, 255, 255, 0.8);
+    --section-border: rgba(255, 255, 255, 0.2);
+}

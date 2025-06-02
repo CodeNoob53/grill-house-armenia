@@ -1,0 +1,204 @@
+/* Header Styles */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    background: var(--white);
+    border-bottom: 1px solid var(--border-light);
+    z-index: var(--z-sticky);
+    transition: var(--transition-base);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.header.scrolled {
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+}
+
+.header__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 var(--spacing-xl);
+}
+
+.header__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.header__logo h1 {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-extrabold);
+    color: var(--primary-color);
+    margin: 0;
+    line-height: 1;
+}
+
+.header__logo span {
+    font-size: var(--font-size-xs);
+    color: var(--text-light);
+    font-weight: var(--font-weight-normal);
+    margin-top: 2px;
+    line-height: 1;
+}
+
+.header__center {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxl);
+}
+
+.nav-link {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: var(--transition-fast);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+    background: rgba(230, 57, 70, 0.05);
+}
+
+.header__phone {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: var(--primary-color);
+    color: var(--white);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    transition: var(--transition-base);
+    white-space: nowrap;
+    font-size: var(--font-size-sm);
+}
+
+.header__phone:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Mobile Menu Button */
+.header__burger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.header__burger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--text-dark);
+    border-radius: 1px;
+    transition: var(--transition-base);
+}
+
+.header__burger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.header__burger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.header__burger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background: var(--white);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-base);
+    z-index: var(--z-modal);
+}
+
+.mobile-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-menu .nav-link {
+    display: block;
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--border-light);
+    text-align: center;
+    font-size: var(--font-size-lg);
+}
+
+.mobile-menu .nav-link:last-child {
+    border-bottom: none;
+}
+
+.mobile-menu .header__phone {
+    margin-top: var(--spacing-lg);
+    justify-content: center;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .header__center {
+        display: none;
+    }
+    
+    .header__burger {
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    .header__content {
+        padding: 0 var(--spacing-md);
+    }
+    
+    .header__logo h1 {
+        font-size: var(--font-size-xl);
+    }
+    
+    .header__phone {
+        font-size: var(--font-size-xs);
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    .header__phone span {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .header__content {
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .header__logo h1 {
+        font-size: var(--font-size-lg);
+    }
+}

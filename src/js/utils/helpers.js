@@ -10,7 +10,7 @@ const Utils = {
 
         // Get all elements by selector
         $$(selector) {
-            return document.querySelectorAll(selector);
+            return Array.from(document.querySelectorAll(selector));
         },
 
         // Create element with attributes
@@ -70,7 +70,11 @@ const Utils = {
                 element.addEventListener(event, handler);
             } else {
                 element.addEventListener(event, (e) => {
-                    if (e.target.matches(selector)) {
+                    // Fix: Check if target and matches exist
+                    if (e.target && typeof e.target.matches === 'function' && e.target.matches(selector)) {
+                        handler(e);
+                    } else if (e.target && e.target.closest && e.target.closest(selector)) {
+                        // Fallback for older browsers
                         handler(e);
                     }
                 });
@@ -325,6 +329,14 @@ const Utils = {
 
     // Animation Utilities
     animation: {
+        // Easing function
+        easeInOutQuad(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t + b;
+            t--;
+            return -c / 2 * (t * (t - 2) - 1) + b;
+        },
+
         // Smooth scroll to element
         scrollTo(element, offset = 0, duration = 800) {
             const targetPosition = element.offsetTop - offset;
@@ -332,23 +344,18 @@ const Utils = {
             const distance = targetPosition - startPosition;
             let startTime = null;
 
+            // Fix: Bind easing function to Utils.animation
+            const easing = Utils.animation.easeInOutQuad;
+
             function animateScroll(currentTime) {
                 if (startTime === null) startTime = currentTime;
                 const timeElapsed = currentTime - startTime;
-                const run = this.easeInOutQuad(timeElapsed, startPosition, distance, duration);
+                const run = easing(timeElapsed, startPosition, distance, duration);
                 window.scrollTo(0, run);
                 if (timeElapsed < duration) requestAnimationFrame(animateScroll);
             }
 
             requestAnimationFrame(animateScroll);
-        },
-
-        // Easing function
-        easeInOutQuad(t, b, c, d) {
-            t /= d / 2;
-            if (t < 1) return c / 2 * t * t + b;
-            t--;
-            return -c / 2 * (t * (t - 2) - 1) + b;
         },
 
         // Fade in element

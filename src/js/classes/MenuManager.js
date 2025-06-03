@@ -106,9 +106,34 @@ class MenuManager {
         // Animate new items
         if (this.animationManager) {
             setTimeout(() => {
-                this.animationManager.animateMenuItems();
+                this.animateMenuItems();
             }, 50);
         }
+    }
+
+    // Animate menu items (fixed version)
+    animateMenuItems() {
+        const menuItems = Utils.dom.$$('.menu-item');
+        
+        if (!this.animationManager?.isAnimeLoaded) {
+            // Fallback animation
+            menuItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                }, index * 100);
+            });
+            return;
+        }
+
+        anime({
+            targets: menuItems,
+            opacity: [0, 1],
+            translateY: [30, 0],
+            scale: [0.9, 1],
+            duration: 600,
+            delay: anime.stagger(100),
+            easing: 'easeOutQuart'
+        });
     }
 
     // Create menu item HTML element
@@ -122,7 +147,7 @@ class MenuManager {
         menuItem.innerHTML = `
             <div class="menu-item__image">
                 <img src="${item.image}" alt="${item.name}" loading="lazy" 
-                     onerror="this.src='assets/images/menu/placeholder.jpg'">
+                     onerror="this.src='https://via.placeholder.com/300x200?text=${encodeURIComponent(item.name)}'">
                 ${item.isPopular ? '<div class="menu-item__badge">Популярне</div>' : ''}
                 ${item.isVegetarian ? '<div class="menu-item__badge menu-item__badge--vegetarian">Вегетаріанське</div>' : ''}
             </div>
@@ -172,7 +197,7 @@ class MenuManager {
                     }
                 </p>
                 ${this.searchQuery ? `
-                    <button class="btn btn-outline" onclick="this.clearSearch()">
+                    <button class="btn btn-outline" onclick="menuManager.clearSearch()">
                         Очистити пошук
                     </button>
                 ` : ''}
@@ -249,31 +274,8 @@ class MenuManager {
         };
     }
 
-    // Load more items (for pagination if needed)
-    loadMore() {
-        // Implementation for loading more items if pagination is needed
-        console.log('Load more items functionality');
-    }
-
-    // Update menu data (for dynamic loading)
-    updateMenuData(newData) {
-        this.menuData = newData;
-        this.renderMenu();
-    }
-
-    // Export menu data for sharing
-    exportMenu() {
-        return {
-            items: this.getFilteredItems(),
-            category: this.currentCategory,
-            search: this.searchQuery,
-            timestamp: new Date().toISOString()
-        };
-    }
-
     // Handle window resize
     handleResize() {
-        // Adjust menu grid layout if needed
         if (Utils.device.isMobile()) {
             Utils.dom.addClass(this.menuGrid, 'mobile-layout');
         } else {
@@ -281,37 +283,8 @@ class MenuManager {
         }
     }
 
-    // Initialize menu with featured items
-    showFeaturedItems() {
-        const featuredItems = this.menuData.popular.filter(item => item.isPopular);
-        
-        if (featuredItems.length === 0) return;
-
-        // Create featured section
-        const featuredSection = Utils.dom.createElement('div', {
-            className: 'featured-menu'
-        });
-
-        featuredSection.innerHTML = `
-            <h3 class="featured-menu__title">Рекомендуємо спробувати</h3>
-            <div class="featured-menu__grid">
-                ${featuredItems.slice(0, 3).map(item => `
-                    <div class="featured-item" data-item-id="${item.id}">
-                        <img src="${item.image}" alt="${item.name}" loading="lazy">
-                        <h4>${item.name}</h4>
-                        <span class="price">${MenuHelpers.formatPrice(item.price)}</span>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-
-        // Insert before main menu
-        this.menuGrid.parentNode.insertBefore(featuredSection, this.menuGrid);
-    }
-
     // Destroy menu manager
     destroy() {
-        // Clean up event listeners and resources
         this.currentCategory = 'all';
         this.searchQuery = '';
         

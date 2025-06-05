@@ -346,3 +346,296 @@
 .will-animate.animation-complete {
     will-change: auto;
 }
+
+/* Section and Element Animations */
+@keyframes section-fade-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes element-fade-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scroll-bounce {
+    0% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) translateY(15px);
+        opacity: 0;
+    }
+}
+
+/* Staggered animation for section elements */
+.section-fullscreen .container > * {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: element-fade-in 0.6s ease-out forwards;
+}
+
+.section-fullscreen .container > *:nth-child(1) { animation-delay: 0.1s; }
+.section-fullscreen .container > *:nth-child(2) { animation-delay: 0.2s; }
+.section-fullscreen .container > *:nth-child(3) { animation-delay: 0.3s; }
+.section-fullscreen .container > *:nth-child(4) { animation-delay: 0.4s; }
+
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .section-fullscreen,
+    .section-fullscreen .container > * {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+    
+    .hero__scroll-icon::before {
+        animation: none;
+    }
+}
+
+/* Base Animations */
+@keyframes section-fade-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes element-fade-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes hero-element-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes hero-image-in {
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-10px) rotate(1deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-10px) rotate(-1deg);
+    }
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 
+            0 6px 20px rgba(40, 167, 69, 0.3),
+            0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 
+            0 8px 30px rgba(40, 167, 69, 0.5),
+            0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes message-slide-in {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Section entrance animations */
+.section-fullscreen {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section-fullscreen.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered animations for section content */
+.section-fullscreen .section-header,
+.section-fullscreen .hero__content,
+.section-fullscreen .menu-categories,
+.section-fullscreen .menu-grid,
+.section-fullscreen .order-content,
+.section-fullscreen .contact-content {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section-fullscreen.animate-in .section-header {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.1s;
+}
+
+.section-fullscreen.animate-in .hero__content {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+}
+
+.section-fullscreen.animate-in .menu-categories {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+}
+
+.section-fullscreen.animate-in .menu-grid {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.4s;
+}
+
+.section-fullscreen.animate-in .order-content {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+}
+
+.section-fullscreen.animate-in .contact-content {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+}
+
+/* Individual element animations */
+.menu-item,
+.info-card,
+.contact-item {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-item.animate-in,
+.info-card.animate-in,
+.contact-item.animate-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Staggered menu items */
+.menu-item:nth-child(1) { transition-delay: 0.1s; }
+.menu-item:nth-child(2) { transition-delay: 0.2s; }
+.menu-item:nth-child(3) { transition-delay: 0.3s; }
+.menu-item:nth-child(4) { transition-delay: 0.4s; }
+.menu-item:nth-child(5) { transition-delay: 0.5s; }
+.menu-item:nth-child(6) { transition-delay: 0.6s; }
+
+/* Loading states */
+.menu-item.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    position: relative;
+}
+
+.menu-item.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(230, 57, 70, 0.3);
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+/* Accessibility - Respect user preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .section-fullscreen,
+    .menu-item,
+    .info-card {
+        opacity: 1;
+        transform: none;
+    }
+    
+    .hero__image,
+    .hero__text > * {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .section-nav-dot {
+        border-width: 3px;
+    }
+    
+    .menu-item,
+    .info-card {
+        border: 2px solid var(--text-dark);
+    }
+    
+    .btn {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Dark mode animations */
+@media (prefers-color-scheme: dark) {
+    .menu-item:hover {
+        box-shadow: 
+            0 20px 40px rgba(255, 255, 255, 0.1),
+            0 8px 25px rgba(230, 57, 70, 0.2);
+    }
+    
+    .info-card:hover {
+        box-shadow: 
+            0 15px 35px rgba(255, 255, 255, 0.1),
+            0 5px 20px rgba(255, 255, 255, 0.05);
+    }
+}

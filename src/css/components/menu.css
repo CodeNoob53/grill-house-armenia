@@ -97,19 +97,88 @@
 
 .menu-item__image {
     position: relative;
-    height: 200px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     overflow: hidden;
+    height: 200px;
 }
 
 .menu-item__image img {
+    transition: opacity 0.3s ease, filter 0.3s ease, transform 0.3s ease;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: var(--transition-base);
 }
 
-.menu-item:hover .menu-item__image img {
-    transform: scale(1.05);
+.menu-item__image img.lazy {
+    opacity: 0.6;
+    filter: blur(2px);
+}
+
+.menu-item__image img.loaded {
+    opacity: 1;
+    filter: blur(0);
+    animation: fadeInImage 0.5s ease-out;
+}
+
+.image-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    text-align: center;
+    flex-direction: column;
+}
+
+.image-fallback i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Shimmer effect для завантаження */
+.menu-item__image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.1) 75%);
+    background-size: 20px 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.menu-item__image.loading::before {
+    opacity: 1;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: 200px 0;
+    }
+}
+
+@keyframes fadeInImage {
+    from {
+        opacity: 0;
+        transform: scale(1.1);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .menu-item__badge {

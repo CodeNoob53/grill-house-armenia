@@ -146,8 +146,17 @@ class MenuManager {
 
         menuItem.innerHTML = `
             <div class="menu-item__image">
-                <img src="${item.image}" alt="${item.name}" loading="lazy" 
-                     onerror="this.src='https://via.placeholder.com/300x200?text=${encodeURIComponent(item.name)}'">
+                <img src="${item.image}" 
+                     alt="${item.name}" 
+                     loading="lazy"
+                     class="menu-image"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-fallback" style="display: none; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; height: 200px; align-items: center; justify-content: center; font-size: 1.2rem; text-align: center;">
+                    <div>
+                        <i class="fas fa-utensils" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                        <div>${item.name}</div>
+                    </div>
+                </div>
                 ${item.isPopular ? '<div class="menu-item__badge">Популярне</div>' : ''}
                 ${item.isVegetarian ? '<div class="menu-item__badge menu-item__badge--vegetarian">Вегетаріанське</div>' : ''}
             </div>

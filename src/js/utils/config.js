@@ -140,9 +140,5 @@ const CONFIG = {
     }
 };
 
-// Export for use in other modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = CONFIG;
-} else {
-    window.CONFIG = CONFIG;
-}
+// Make CONFIG globally available
+window.CONFIG = CONFIG;

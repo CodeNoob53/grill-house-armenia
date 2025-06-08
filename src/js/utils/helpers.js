@@ -70,8 +70,8 @@ const Utils = {
                 element.addEventListener(event, handler);
             } else {
                 element.addEventListener(event, (e) => {
-                    // Fix: Check if target and matches exist
-                    if (e.target && typeof e.target.matches === 'function' && e.target.matches(selector)) {
+                    // Check if target matches selector
+                    if (e.target && e.target.matches && e.target.matches(selector)) {
                         handler(e);
                     } else if (e.target && e.target.closest && e.target.closest(selector)) {
                         // Fallback for older browsers
@@ -344,7 +344,6 @@ const Utils = {
             const distance = targetPosition - startPosition;
             let startTime = null;
 
-            // Fix: Bind easing function to Utils.animation
             const easing = Utils.animation.easeInOutQuad;
 
             function animateScroll(currentTime) {
@@ -430,10 +429,6 @@ function scrollToSection(sectionId, offset = 80) {
     }
 }
 
-// Export for use in other modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = Utils;
-} else {
-    window.Utils = Utils;
-    window.scrollToSection = scrollToSection;
-}
+// Make Utils globally available
+window.Utils = Utils;
+window.scrollToSection = scrollToSection;
